@@ -1,14 +1,22 @@
-from json import load, dump
+from json import load, dump, JSONDecodeError
 
 FILE = "журнал.json"
 
 
 def journal_load():
-    with open(FILE, "r", encoding="utf-8") as f:
-        journal = load(f)
-        return f"Все записи: {journal}"
+    try:
+        with open(FILE, "r", encoding="utf-8") as f:
+            journal = load(f)
+        return journal if isinstance(journal, list) else []
+
+    except (FileNotFoundError, JSONDecodeError):
+        return []
 
 
 def save_journal(data):
+    journal_data = journal_load()
+
+    journal_data.append(data)
+
     with open(FILE, "w", encoding="utf-8") as f:
-        dump(data, f, ensure_ascii=False, indent=4)
+        dump(journal_data, f, ensure_ascii=False, indent=4)

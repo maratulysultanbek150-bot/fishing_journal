@@ -7,7 +7,6 @@ def proverka(data):
 
 
 def main():
-    fish_data = {}
     while True:
         print("""Выбери действия:
     1.Записать улов
@@ -20,6 +19,7 @@ def main():
             continue
 
         if response == 1:
+            fish_data = {}
             fish = input("Вид рыбы:").strip()
             if proverka(fish):
                 print("Нельзя пустую строку, попробуй снова")
@@ -30,6 +30,7 @@ def main():
                 weight = float(input("Вес рыбы (кг):"))
             except ValueError:
                 print("Ошибка, напиши число с точкой")
+                continue
             fish_data["fish_weight"] = weight
 
             location = input("Место пойманной рыбы:").strip()
@@ -38,17 +39,17 @@ def main():
                 continue
             fish_data["location"] = location
 
-            date = input("Внести текущую дату?(д/н)").strip()
-            if ("", "да", "д", "y", "yes") in date:
+            date_input = (
+                input("Внести текущую дату? (Enter — да, иначе любая буква): ")
+                .strip()
+                .lower()
+            )
+            if not date_input or date_input == ("да", "д", "y", "yes"):
                 fish_data["date"] = datetime.date.today().strftime("%d.%m.%Y")
             else:
-                date_2 = input("Введите дату(Д.М.Г):").strip()
-                fish_data["date"] = date_2
+                fish_data["date"] = input("Введите дату (ДД.ММ.ГГГГ): ").strip()
 
             data = input("Еще подробности(приманка, погода, проводка и т.д.):").strip()
-            if proverka(data):
-                print("Нельзя пустую строку, попробуй снова")
-                continue
             fish_data["comment"] = data
 
             save_journal(fish_data)
@@ -59,6 +60,10 @@ def main():
 
         elif response == 3:
             break
+
+        else:
+            print("Ошибка. Такого пункта нет, выберите число от 1 до 3.")
+            continue
 
 
 main()
