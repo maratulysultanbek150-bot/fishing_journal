@@ -1,6 +1,6 @@
 from json import load, dump, JSONDecodeError
 
-FILE = "журнал.json"
+FILE = "data.json"
 
 
 def journal_load():
