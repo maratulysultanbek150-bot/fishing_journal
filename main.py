@@ -44,7 +44,7 @@ def main():
                 .strip()
                 .lower()
             )
-            if not date_input or date_input == ("да", "д", "y", "yes"):
+            if not date_input or date_input in ("да", "д", "y", "yes"):
                 fish_data["date"] = datetime.date.today().strftime("%d.%m.%Y")
             else:
                 fish_data["date"] = input("Введите дату (ДД.ММ.ГГГГ): ").strip()
