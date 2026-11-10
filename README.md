@@ -15,7 +15,7 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/твой_ник/fishing-journal.git
+git clone https://github.com/maratulysultanbek150-bot/fishing_journal.git
 ```
 
 2. Перейдите в директорию проекта:
